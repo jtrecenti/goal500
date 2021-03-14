@@ -1,0 +1,70 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# goal500
+
+<!-- badges: start -->
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+<!-- badges: end -->
+
+Esse repositório mostra os gols dos principais artilheiros ainda ativos, com base nas estatísticas disponíveis no Wikipédia.
+
+## Installation
+
+```{r eval=FALSE}
+remotes::install_github("jtrecenti/goal500")
+```
+
+## Gráfico
+
+```{r, fig.width=9, fig.height=5, dpi = 300}
+library(ggplot2)
+library(goal500)
+
+da <- get_player_stats()
+
+da_plot <- da %>% 
+  dplyr::filter(!is.na(total)) %>% 
+  dplyr::mutate(year = as.numeric(year)) %>% 
+  dplyr::group_by(name, year) %>% 
+  dplyr::summarise(total = sum(total), .groups = "drop_last") %>% 
+  dplyr::arrange(year) %>% 
+  dplyr::mutate(total_cumsum = cumsum(total)) %>% 
+  dplyr::group_by(name) %>% 
+  dplyr::mutate(total_player = sum(total), year = year - min(year)) %>% 
+  dplyr::ungroup() %>% 
+  dplyr::mutate(name = forcats::fct_reorder(name, total_player))
+
+da_plot %>% 
+  ggplot(aes(year, total_cumsum, colour = name)) +
+  geom_point(size = .8) +
+  geom_line(size = .9) +
+  scale_colour_viridis_d(end = .9) +
+  theme_minimal(14) +
+  guides(colour = guide_legend(reverse = TRUE)) +
+  labs(x = "Years active", y = "Goals", colour = "Name")
+```
+
+```{r, fig.width=9, fig.height=5, dpi = 300}
+da_plot %>% 
+  ggplot(aes(year, total, colour = name)) +
+  geom_line(alpha = .3) +
+  geom_smooth(se = FALSE, method = "loess", formula = y~x, span = .5) +
+  scale_colour_viridis_d(end = .9) +
+  theme_minimal(14) +
+  guides(colour = guide_legend(reverse = TRUE)) +
+  labs(x = "Years active", y = "Goals", colour = "Name")
+```
+
