@@ -9,14 +9,20 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-The goal of goal500 is to …
+Esse repositório mostra os gols dos principais artilheiros ainda ativos,
+com base nas estatísticas disponíveis no Wikipédia.
 
 ## Installation
+
+``` r
+remotes::install_github("jtrecenti/goal500")
+```
 
 ## Gráfico
 
 ``` r
 library(ggplot2)
+library(gganimate)
 library(goal500)
 
 da <- get_player_stats()
@@ -31,28 +37,45 @@ da_plot <- da %>%
   dplyr::group_by(name) %>% 
   dplyr::mutate(total_player = sum(total), year = year - min(year)) %>% 
   dplyr::ungroup() %>% 
-  dplyr::mutate(name = forcats::fct_reorder(name, total_player))
+  dplyr::mutate(
+    name = stringr::str_glue("{name} ({total_player})"),
+    name = forcats::fct_reorder(name, total_player)
+  )
 
-da_plot %>% 
-  ggplot(aes(year, total_cumsum, colour = name)) +
-  geom_line() +
-  scale_colour_viridis_d() +
+gg <- da_plot %>% 
+  ggplot(aes(x = year, y = total_cumsum, colour = name)) +
+  geom_point(size = .8) +
+  geom_line(size = .9) +
+  geom_text(
+    aes(label = name),
+    data = da_plot %>% 
+      dplyr::arrange(dplyr::desc(year)) %>% 
+      dplyr::distinct(name, .keep_all = TRUE)
+  ) +
+  scale_colour_viridis_d(end = .9) +
+  scale_x_continuous(breaks = 0:20 * 2) +
+  scale_y_continuous(breaks = 0:10 * 100) +
   theme_minimal(14) +
   guides(colour = guide_legend(reverse = TRUE)) +
-  labs(x = "Year", y = "Goals", colour = "Name")
+  labs(
+    x = "Years active", 
+    y = "Goals",
+    colour = "Name",
+    title = "Cumulative goals",
+    subtitle = "Active players with most goals",
+    caption = "Source: Wikipedia"
+  ) +
+  transition_reveal(year) +
+  enter_grow()
+
+animate(
+  gg, 
+  nframe = 26,
+  fps = 2,
+  end_pause = 5,
+  width = 1000, 
+  height = 600
+)
 ```
 
-<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
-
-``` r
-da_plot %>% 
-  ggplot(aes(year, total, colour = name)) +
-  geom_smooth(se = FALSE) +
-  scale_colour_viridis_d() +
-  theme_minimal(14) +
-  guides(colour = guide_legend(reverse = TRUE)) +
-  labs(x = "Year", y = "Goals", colour = "Name")
-#> `geom_smooth()` using method = 'loess' and formula 'y ~ x'
-```
-
-<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-3-1.gif" width="100%" />
