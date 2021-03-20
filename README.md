@@ -25,6 +25,11 @@ if (!requireNamespace("goal500", quietly = TRUE))
 ``` r
 library(ggplot2)
 library(gganimate)
+#> No renderer backend detected. gganimate will default to writing frames to separate files
+#> Consider installing:
+#> - the `gifski` package for gif output
+#> - the `av` package for video output
+#> and restarting the R session
 library(goal500)
 
 da <- get_player_stats()
@@ -79,6 +84,6 @@ animate(
   width = 1000, 
   height = 600
 )
+#> Warning: No renderer available. Please install the gifski, av, or magick package
+#> to create animated output
 ```
-
-<img src="man/figures/README-gganimate-1.gif" width="100%" />
