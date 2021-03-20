@@ -24,8 +24,9 @@ Esse repositório mostra os gols dos principais artilheiros ainda ativos, com ba
 
 ## Installation
 
-```{r eval=FALSE}
-remotes::install_github("jtrecenti/goal500")
+```{r}
+if (!requireNamespace("goal500", quietly = TRUE))
+  remotes::install_github("jtrecenti/goal500")
 ```
 
 ## Gráfico

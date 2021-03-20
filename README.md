@@ -16,7 +16,8 @@ com base nas estatísticas disponíveis no Wikipédia.
 ## Installation
 
 ``` r
-remotes::install_github("jtrecenti/goal500")
+if (!requireNamespace("goal500", quietly = TRUE))
+  remotes::install_github("jtrecenti/goal500")
 ```
 
 ## Gráfico
