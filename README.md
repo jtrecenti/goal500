@@ -25,11 +25,6 @@ if (!requireNamespace("goal500", quietly = TRUE))
 ``` r
 library(ggplot2)
 library(gganimate)
-#> No renderer backend detected. gganimate will default to writing frames to separate files
-#> Consider installing:
-#> - the `gifski` package for gif output
-#> - the `av` package for video output
-#> and restarting the R session
 library(goal500)
 
 da <- get_player_stats()
@@ -87,6 +82,9 @@ animate(
   width = 1000, 
   height = 600
 )
-#> Warning: No renderer available. Please install the gifski, av, or magick package
-#> to create animated output
+#> Rendering [=======>------------------------------------------------------------------------] at 4.5 fps ~ eta:  4sRendering [==========>---------------------------------------------------------------------] at 4.4 fps ~ eta:  4sRendering [==============>-----------------------------------------------------------------] at 4.3 fps ~ eta:  4sRendering [==================>-------------------------------------------------------------] at 4.2 fps ~ eta:  4sRendering [======================>---------------------------------------------------------] at 4.2 fps ~ eta:  4sRendering [==========================>-----------------------------------------------------] at 4.2 fps ~ eta:  3sRendering [=============================>--------------------------------------------------] at 4.2 fps ~ eta:  3sRendering [=================================>----------------------------------------------] at 4.2 fps ~ eta:  3sRendering [=====================================>------------------------------------------] at 4.2 fps ~ eta:  3sRendering [=========================================>--------------------------------------] at 4.1 fps ~ eta:  2sRendering [=============================================>----------------------------------] at 4.1 fps ~ eta:  2sRendering [=================================================>------------------------------] at 4.1 fps ~ eta:  2sRendering [======================================================>---------------------------] at 4 fps ~ eta:  2sRendering [==========================================================>-----------------------] at 4 fps ~ eta:  1sRendering [=============================================================>--------------------] at 4 fps ~ eta:  1sRendering [=================================================================>----------------] at 4 fps ~ eta:  1sRendering [====================================================================>-----------] at 4.1 fps ~ eta:  1sRendering [=======================================================================>--------] at 4.1 fps ~ eta:  0sRendering [===========================================================================>----] at 4.1 fps ~ eta:  0sRendering [================================================================================] at 4.1 fps ~ eta:  0s                                                                                                                  
+#> Frame 1 (3%)Frame 2 (7%)Frame 3 (11%)Frame 4 (15%)Frame 5 (19%)Frame 6 (23%)Frame 7 (26%)Frame 8 (30%)Frame 9 (34%)Frame 10 (38%)Frame 11 (42%)Frame 12 (46%)Frame 13 (50%)Frame 14 (53%)Frame 15 (57%)Frame 16 (61%)Frame 17 (65%)Frame 18 (69%)Frame 19 (73%)Frame 20 (76%)Frame 21 (80%)Frame 22 (84%)Frame 23 (88%)Frame 24 (92%)Frame 25 (96%)Frame 26 (100%)
+#> Finalizing encoding... done!
 ```
+
+<img src="man/figures/README-gganimate-1.gif" width="100%" />
