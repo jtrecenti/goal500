@@ -24,7 +24,11 @@ get_active_players <- function() {
   a <- wiki_url("/wiki/List_of_footballers_with_500_or_more_goals") %>%
     httr::GET() %>%
     xml2::read_html() %>%
-    xml2::xml_find_all("//table[2]/tbody/tr/th/parent::tr/td[1]/b//a")
+    xml2::xml_find_all(stringr::str_glue(
+      "//h2[span/@id='Active_players']/following-sibling::table",
+      "/tbody/tr/th/parent::tr/td[1]/b//a"
+    ))
+
   u <- a %>%
     xml2::xml_attr("href") %>%
     wiki_url()

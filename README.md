@@ -78,4 +78,4 @@ animate(
 )
 ```
 
-<img src="man/figures/README-unnamed-chunk-3-1.gif" width="100%" />
+<img src="man/figures/README-gganimate-1.gif" width="100%" />

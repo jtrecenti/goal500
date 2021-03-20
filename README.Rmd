@@ -17,6 +17,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![R-CMD-check](https://github.com/jtrecenti/goal500/workflows/R-CMD-check/badge.svg)](https://github.com/jtrecenti/goal500/actions)
 <!-- badges: end -->
 
 Esse repositório mostra os gols dos principais artilheiros ainda ativos, com base nas estatísticas disponíveis no Wikipédia.
@@ -29,7 +30,7 @@ remotes::install_github("jtrecenti/goal500")
 
 ## Gráfico
 
-```{r, fig.width=9, fig.height=6, dpi = 300}
+```{r gganimate, fig.width=9, fig.height=6, dpi = 300}
 library(ggplot2)
 library(gganimate)
 library(goal500)
@@ -77,6 +78,7 @@ gg <- da_plot %>%
   transition_reveal(year) +
   enter_grow()
 
+# https://github.com/thomasp85/gganimate/issues/431#issuecomment-803363466
 animate(
   gg, 
   nframe = 26,
