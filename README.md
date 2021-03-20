@@ -71,6 +71,9 @@ gg <- da_plot %>%
   enter_grow()
 
 # https://github.com/thomasp85/gganimate/issues/431#issuecomment-803363466
+if (!requireNamespace("gifski", quietly = TRUE))
+  install.packages('gifski', repos = 'https://cran.microsoft.com/snapshot/2021-02-28')
+
 animate(
   gg, 
   nframe = 26,
