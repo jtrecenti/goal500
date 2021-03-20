@@ -7,6 +7,7 @@
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![R-CMD-check](https://github.com/jtrecenti/goal500/workflows/R-CMD-check/badge.svg)](https://github.com/jtrecenti/goal500/actions)
 <!-- badges: end -->
 
 Esse repositório mostra os gols dos principais artilheiros ainda ativos,
@@ -68,6 +69,7 @@ gg <- da_plot %>%
   transition_reveal(year) +
   enter_grow()
 
+# https://github.com/thomasp85/gganimate/issues/431#issuecomment-803363466
 animate(
   gg, 
   nframe = 26,
