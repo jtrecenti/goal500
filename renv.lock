@@ -170,6 +170,13 @@
       "Repository": "CRAN",
       "Hash": "3eb6477d01eb5bbdc03f7d5f70f2733e"
     },
+    "gifski": {
+      "Package": "gifski",
+      "Version": "0.8.6",
+      "Source": "Repository",
+      "Repository": "https://cran.microsoft.com/snapshot/2021-02-28",
+      "Hash": "ca21682de4210b1c6b59fb010b94cf09"
+    },
     "glue": {
       "Package": "glue",
       "Version": "1.4.2",
