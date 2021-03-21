@@ -9,7 +9,7 @@ g500_tab <- function(year_start = "1950") {
   wiki_url("/wiki/List_of_footballers_with_500_or_more_goals") %>%
     httr::GET() %>%
     xml2::read_html() %>%
-    xml2::xml_find_first("//table") %>%
+    xml2::xml_find_first("//*[./span[@id='Ranking']]//following-sibling::table") %>%
     rvest::html_table() %>%
     dplyr::rename_with(~stringr::str_to_lower(stringr::str_replace(.x, ' ', "_"))) %>%
     dplyr::filter(stringr::str_extract(years, "^[0-9]{4}") >= year_start) %>%
