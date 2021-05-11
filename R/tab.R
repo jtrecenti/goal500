@@ -39,6 +39,20 @@ get_active_players <- function() {
   tibble::tibble(
     name = nm, link = u
   )
+
+  tibble::tibble(
+    name = c(
+      "Neymar Jr",
+      "Lionel Messi",
+      "Cristiano Ronaldo"
+    ),
+    link = c(
+      "https://en.wikipedia.org/wiki/Neymar",
+      "https://en.wikipedia.org/wiki/Lionel_Messi",
+      "https://en.wikipedia.org/wiki/Cristiano_Ronaldo"
+    )
+  )
+
 }
 
 gols_ano_jogador <- function(u) {

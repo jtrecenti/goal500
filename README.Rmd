@@ -31,6 +31,8 @@ if (!requireNamespace("goal500", quietly = TRUE))
 
 ## Gráfico
 
+No passado, o site do Wiki mostrava os jogadores ativos. Agora não mostra mais. Então eu fiz a lista manualmente, mas com apenas 3 jogadores. 
+
 ```{r gganimate, fig.width=9, fig.height=6, dpi = 300}
 library(ggplot2)
 library(gganimate)
