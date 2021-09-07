@@ -24,7 +24,7 @@ if (!requireNamespace("goal500", quietly = TRUE))
 
 No passado, o site do Wiki mostrava os jogadores ativos. Agora não
 mostra mais. Então eu fiz a lista manualmente, mas com apenas 3
-jogadores!
+jogadores\!
 
 ``` r
 library(ggplot2)
