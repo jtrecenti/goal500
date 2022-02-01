@@ -24,11 +24,16 @@ if (!requireNamespace("goal500", quietly = TRUE))
 
 No passado, o site do Wiki mostrava os jogadores ativos. Agora não
 mostra mais. Então eu fiz a lista manualmente, mas com apenas 3
-jogadores!
+jogadores\!
 
 ``` r
 library(ggplot2)
 library(gganimate)
+#> No renderer backend detected. gganimate will default to writing frames to separate files
+#> Consider installing:
+#> - the `gifski` package for gif output
+#> - the `av` package for video output
+#> and restarting the R session
 library(goal500)
 
 da <- get_player_stats()
@@ -53,11 +58,12 @@ da_plot %>%
   knitr::kable()
 ```
 
-| name                    | total_player |
-|:------------------------|-------------:|
-| Cristiano Ronaldo (821) |          821 |
-| Lionel Messi (785)      |          785 |
-| Neymar Jr (401)         |          401 |
+| name                    | total\_player |
+| :---------------------- | ------------: |
+| Cristiano Ronaldo (821) |           821 |
+| Lionel Messi (785)      |           785 |
+| Lewandowski (597)       |           597 |
+| Neymar Jr (401)         |           401 |
 
 ``` r
 gg <- da_plot %>% 
@@ -94,6 +100,6 @@ gganimate::animate(
   width = 1000, 
   height = 600
 )
+#> Warning: No renderer available. Please install the gifski, av, or magick package
+#> to create animated output
 ```
-
-<img src="man/figures/README-gganimate-1.gif" width="100%" />
