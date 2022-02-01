@@ -18,13 +18,30 @@ com base nas estatísticas disponíveis no Wikipédia.
 ``` r
 if (!requireNamespace("goal500", quietly = TRUE))
   remotes::install_github("jtrecenti/goal500")
+#> Using github PAT from envvar GITHUB_PAT
+#> Downloading GitHub repo jtrecenti/goal500@HEAD
+#> pillar   (1.6.5 -> 1.7.0) [CRAN]
+#> generics (0.1.1 -> 0.1.2) [CRAN]
+#> tidyr    (1.1.4 -> 1.2.0) [CRAN]
+#> Installing 3 packages: pillar, generics, tidyr
+#> Installing packages into '/home/jt/R/x86_64-pc-linux-gnu-library/4.1'
+#> (as 'lib' is unspecified)
+#> * checking for file ‘/tmp/Rtmp6iUoQ3/remotes26d8242595697/jtrecenti-goal500-c8dd8ad/DESCRIPTION’ ... OK
+#> * preparing ‘goal500’:
+#> * checking DESCRIPTION meta-information ... OK
+#> * checking for LF line-endings in source and make files and shell scripts
+#> * checking for empty or unneeded directories
+#> Omitted ‘LazyData’ from DESCRIPTION
+#> * building ‘goal500_0.0.0.9000.tar.gz’
+#> Installing package into '/home/jt/R/x86_64-pc-linux-gnu-library/4.1'
+#> (as 'lib' is unspecified)
 ```
 
 ## Gráfico
 
 No passado, o site do Wiki mostrava os jogadores ativos. Agora não
 mostra mais. Então eu fiz a lista manualmente, mas com apenas 3
-jogadores\!
+jogadores!
 
 ``` r
 library(ggplot2)
@@ -49,21 +66,21 @@ da_plot <- da %>%
   )
 
 gg <- da_plot %>% 
-  ggplot(aes(x = year, y = total_cumsum, colour = name)) +
-  geom_point(size = .8) +
-  geom_line(size = .9) +
-  geom_text(
-    aes(label = name),
+  ggplot2::ggplot(ggplot2::aes(x = year, y = total_cumsum, colour = name)) +
+  ggplot2::geom_point(size = .8) +
+  ggplot2::geom_line(size = .9) +
+  ggplot2::geom_text(
+    ggplot2::aes(label = name),
     data = da_plot %>% 
       dplyr::arrange(dplyr::desc(year)) %>% 
       dplyr::distinct(name, .keep_all = TRUE)
   ) +
-  scale_colour_viridis_d(end = .9) +
-  scale_x_continuous(breaks = 0:20 * 2) +
-  scale_y_continuous(breaks = 0:10 * 100) +
-  theme_minimal(14) +
-  guides(colour = guide_legend(reverse = TRUE)) +
-  labs(
+  ggplot2::scale_colour_viridis_d(end = .9) +
+  ggplot2::scale_x_continuous(breaks = 0:20 * 2) +
+  ggplot2::scale_y_continuous(breaks = 0:10 * 100) +
+  ggplot2::theme_minimal(14) +
+  ggplot2::guides(colour = ggplot2::guide_legend(reverse = TRUE)) +
+  ggplot2::labs(
     x = "Years active", 
     y = "Goals",
     colour = "Name",
@@ -71,14 +88,10 @@ gg <- da_plot %>%
     subtitle = "Active players with most goals",
     caption = "Source: Wikipedia"
   ) +
-  transition_reveal(year) +
-  enter_grow()
+  gganimate::transition_reveal(year) +
+  gganimate::enter_grow()
 
-# https://github.com/thomasp85/gganimate/issues/431#issuecomment-803363466
-if (!requireNamespace("gifski", quietly = TRUE))
-  install.packages('gifski', repos = 'https://cran.microsoft.com/snapshot/2021-02-28')
-
-animate(
+gganimate::animate(
   gg, 
   nframe = 26,
   fps = 2,
