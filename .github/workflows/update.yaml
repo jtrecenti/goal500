@@ -35,7 +35,7 @@ jobs:
           if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
           options(
             repos = c(pkgmanager = "https://packagemanager.rstudio.com/all/__linux__/bionic/2022-01-03+Y3JhbiwyOjQ1MjYyMTU7NTY4Qjk1ODA"),
-            renv.config.repos.override = c(pkgmanager = "https://packagemanager.rstudio.com/all/__linux__/bionic/2022-01-03+Y3JhbiwyOjQ1MjYyMTU7NTY4Qjk1ODA", "https://cloud.r-project.org")
+            renv.config.repos.override = c(pkgmanager = "https://packagemanager.rstudio.com/all/__linux__/bionic/2022-01-03+Y3JhbiwyOjQ1MjYyMTU7NTY4Qjk1ODA", cran = "https://cloud.r-project.org")
           )
           renv::restore()
           remotes::install_local(dependencies = TRUE)
