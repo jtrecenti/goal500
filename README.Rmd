@@ -34,7 +34,7 @@ if (!requireNamespace("goal500", quietly = TRUE))
 
 No passado, o site do Wiki mostrava os jogadores ativos. Agora não mostra mais. Então eu fiz a lista manualmente, mas com apenas 3 jogadores!
 
-```{r gganimate, fig.width=9, fig.height=6, dpi = 300}
+```{r dados}
 library(ggplot2)
 library(gganimate)
 library(goal500)
@@ -56,6 +56,13 @@ da_plot <- da %>%
     name = forcats::fct_reorder(name, total_player)
   )
 
+da_plot %>% 
+  dplyr::distinct(name, total_player) %>% 
+  knitr::kable()
+```
+
+
+```{r gganimate, fig.width=9, fig.height=6, dpi = 300}
 gg <- da_plot %>% 
   ggplot2::ggplot(ggplot2::aes(x = year, y = total_cumsum, colour = name)) +
   ggplot2::geom_point(size = .8) +

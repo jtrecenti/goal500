@@ -18,23 +18,6 @@ com base nas estatísticas disponíveis no Wikipédia.
 ``` r
 if (!requireNamespace("goal500", quietly = TRUE))
   remotes::install_github("jtrecenti/goal500")
-#> Using github PAT from envvar GITHUB_PAT
-#> Downloading GitHub repo jtrecenti/goal500@HEAD
-#> pillar   (1.6.5 -> 1.7.0) [CRAN]
-#> generics (0.1.1 -> 0.1.2) [CRAN]
-#> tidyr    (1.1.4 -> 1.2.0) [CRAN]
-#> Installing 3 packages: pillar, generics, tidyr
-#> Installing packages into '/home/jt/R/x86_64-pc-linux-gnu-library/4.1'
-#> (as 'lib' is unspecified)
-#> * checking for file ‘/tmp/Rtmp6iUoQ3/remotes26d8242595697/jtrecenti-goal500-c8dd8ad/DESCRIPTION’ ... OK
-#> * preparing ‘goal500’:
-#> * checking DESCRIPTION meta-information ... OK
-#> * checking for LF line-endings in source and make files and shell scripts
-#> * checking for empty or unneeded directories
-#> Omitted ‘LazyData’ from DESCRIPTION
-#> * building ‘goal500_0.0.0.9000.tar.gz’
-#> Installing package into '/home/jt/R/x86_64-pc-linux-gnu-library/4.1'
-#> (as 'lib' is unspecified)
 ```
 
 ## Gráfico
@@ -65,6 +48,18 @@ da_plot <- da %>%
     name = forcats::fct_reorder(name, total_player)
   )
 
+da_plot %>% 
+  dplyr::distinct(name, total_player) %>% 
+  knitr::kable()
+```
+
+| name                    | total_player |
+|:------------------------|-------------:|
+| Cristiano Ronaldo (821) |          821 |
+| Lionel Messi (785)      |          785 |
+| Neymar Jr (401)         |          401 |
+
+``` r
 gg <- da_plot %>% 
   ggplot2::ggplot(ggplot2::aes(x = year, y = total_cumsum, colour = name)) +
   ggplot2::geom_point(size = .8) +
