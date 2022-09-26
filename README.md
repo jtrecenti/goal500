@@ -56,7 +56,7 @@ da_plot %>%
 | name                    | total\_player |
 | :---------------------- | ------------: |
 | Cristiano Ronaldo (834) |           834 |
-| Lionel Messi (802)      |           802 |
+| Lionel Messi (804)      |           804 |
 | Lewandowski (628)       |           628 |
 | Neymar Jr (426)         |           426 |
 
