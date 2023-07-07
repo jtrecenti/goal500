@@ -45,13 +45,15 @@ get_active_players <- function() {
       "Neymar Jr",
       "Lionel Messi",
       "Cristiano Ronaldo",
-      "Lewandowski"
+      "Lewandowski",
+      "Haaland"
     ),
     link = c(
       "https://en.wikipedia.org/wiki/Neymar",
       "https://en.wikipedia.org/wiki/Lionel_Messi",
       "https://en.wikipedia.org/wiki/Cristiano_Ronaldo",
-      "https://en.wikipedia.org/wiki/Robert_Lewandowski"
+      "https://en.wikipedia.org/wiki/Robert_Lewandowski",
+      "https://en.wikipedia.org/wiki/Erling_Haaland"
     )
   )
 
