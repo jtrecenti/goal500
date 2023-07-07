@@ -24,7 +24,7 @@ if (!requireNamespace("goal500", quietly = TRUE))
 
 No passado, o site do Wiki mostrava os jogadores ativos. Agora não
 mostra mais. Então eu fiz a lista manualmente, mas com apenas 3
-jogadores\!
+jogadores!
 
 ``` r
 library(ggplot2)
@@ -33,42 +33,43 @@ library(goal500)
 
 da <- get_player_stats()
 
-da_plot <- da %>% 
-  dplyr::filter(!is.na(total)) %>% 
-  dplyr::mutate(year = as.numeric(year)) %>% 
-  dplyr::group_by(name, year) %>% 
-  dplyr::summarise(total = sum(total), .groups = "drop_last") %>% 
-  dplyr::arrange(year) %>% 
-  dplyr::mutate(total_cumsum = cumsum(total)) %>% 
-  dplyr::group_by(name) %>% 
-  dplyr::mutate(total_player = sum(total), year = year - min(year)) %>% 
-  dplyr::ungroup() %>% 
+da_plot <- da %>%
+  dplyr::filter(!is.na(total)) %>%
+  dplyr::mutate(year = as.numeric(year)) %>%
+  dplyr::group_by(name, year) %>%
+  dplyr::summarise(total = sum(total), .groups = "drop_last") %>%
+  dplyr::arrange(year) %>%
+  dplyr::mutate(total_cumsum = cumsum(total)) %>%
+  dplyr::group_by(name) %>%
+  dplyr::mutate(total_player = sum(total), year = year - min(year)) %>%
+  dplyr::ungroup() %>%
   dplyr::mutate(
     name = stringr::str_glue("{name} ({total_player})"),
     name = forcats::fct_reorder(name, total_player)
   )
 
-da_plot %>% 
-  dplyr::distinct(name, total_player) %>% 
+da_plot %>%
+  dplyr::distinct(name, total_player) %>%
   knitr::kable()
 ```
 
-| name                    | total\_player |
-| :---------------------- | ------------: |
-| Cristiano Ronaldo (850) |           850 |
-| Lionel Messi (830)      |           830 |
-| Lewandowski (644)       |           644 |
-| Neymar Jr (436)         |           436 |
+| name                    | total_player |
+|:------------------------|-------------:|
+| Cristiano Ronaldo (856) |          856 |
+| Lionel Messi (834)      |          834 |
+| Lewandowski (651)       |          651 |
+| Neymar Jr (436)         |          436 |
+| Haaland (231)           |          231 |
 
 ``` r
-gg <- da_plot %>% 
+gg <- da_plot %>%
   ggplot2::ggplot(ggplot2::aes(x = year, y = total_cumsum, colour = name)) +
   ggplot2::geom_point(size = .8) +
   ggplot2::geom_line(size = .9) +
   ggplot2::geom_text(
     ggplot2::aes(label = name),
-    data = da_plot %>% 
-      dplyr::arrange(dplyr::desc(year)) %>% 
+    data = da_plot %>%
+      dplyr::arrange(dplyr::desc(year)) %>%
       dplyr::distinct(name, .keep_all = TRUE)
   ) +
   ggplot2::scale_colour_viridis_d(end = .9) +
@@ -77,7 +78,7 @@ gg <- da_plot %>%
   ggplot2::theme_minimal(14) +
   ggplot2::guides(colour = ggplot2::guide_legend(reverse = TRUE)) +
   ggplot2::labs(
-    x = "Years active", 
+    x = "Years active",
     y = "Goals",
     colour = "Name",
     title = "Cumulative goals",
@@ -88,11 +89,11 @@ gg <- da_plot %>%
   gganimate::enter_grow()
 
 gganimate::animate(
-  gg, 
+  gg,
   nframe = 26,
   fps = 2,
   end_pause = 5,
-  width = 1000, 
+  width = 1000,
   height = 600
 )
 ```
