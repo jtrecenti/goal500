@@ -1,6 +1,7 @@
 # For help debugging build failures open an issue on the RStudio community with the 'github-actions' tag.
 # https://community.rstudio.com/new-topic?category=Package%20development&tags=github-actions
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -12,7 +13,7 @@ name: update-readme
 
 jobs:
   update-readme:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     env:
       GITHUB_PAT: ${{ secrets.PAT }}
       RENV_PATHS_ROOT: ~/.local/share/renv
