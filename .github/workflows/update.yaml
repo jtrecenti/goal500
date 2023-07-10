@@ -27,6 +27,7 @@ jobs:
             any::ggplot2
             any::rmarkdown
             any::gganimate
+            local::.
       - name: README
         run: |
           rmarkdown::render("README.Rmd")
