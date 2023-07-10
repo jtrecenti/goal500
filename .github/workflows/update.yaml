@@ -26,6 +26,7 @@ jobs:
           extra-packages: |
             any::ggplot2
             any::rmarkdown
+            any::gganimate
       - name: README
         run: |
           rmarkdown::render("README.Rmd")
