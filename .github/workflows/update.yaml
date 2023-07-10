@@ -27,6 +27,7 @@ jobs:
             any::ggplot2
             any::rmarkdown
             any::gganimate
+            any::forcats
             local::.
       - name: README
         run: |
