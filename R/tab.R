@@ -66,7 +66,7 @@ gols_ano_jogador <- function(u) {
     xml2::read_html()
 
   club <- h %>%
-    xml2::xml_find_first("//*[@id='Club']/parent::h3/following-sibling::table") %>%
+    xml2::xml_find_first("//*[@id='Club']/parent::div/following-sibling::table") %>%
     rvest::html_table(fill = TRUE) %>%
     janitor::clean_names() %>%
     dplyr::filter(stringr::str_detect(season, "[0-9]{4}")) %>%
@@ -78,7 +78,7 @@ gols_ano_jogador <- function(u) {
     dplyr::summarise(total = sum(total))
 
   international <- h %>%
-    xml2::xml_find_all("//*[@id='International']/parent::h3/following-sibling::table[@class='wikitable']") %>%
+    xml2::xml_find_all("//*[@id='International']/parent::div/following-sibling::table[@class='wikitable']") %>%
     rvest::html_table(fill = TRUE) %>%
     purrr::map_dfr(janitor::clean_names) %>%
     dplyr::filter(stringr::str_detect(year, "[0-9]{4}")) %>%
