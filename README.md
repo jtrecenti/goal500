@@ -59,6 +59,7 @@ da_plot %>%
 | Lionel Messi (848)      |          848 |
 | Lewandowski (671)       |          671 |
 | Neymar Jr (439)         |          439 |
+| Mbappe (378)            |          378 |
 | Haaland (255)           |          255 |
 
 ``` r
